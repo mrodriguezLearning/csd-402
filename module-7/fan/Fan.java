@@ -1,0 +1,130 @@
+/**
+ *
+ * @author marco Rodriguez
+ * Assignment 7.2 Fan
+ */
+package fan;
+        
+public class Fan {
+    // Four constants representing the speed settings
+    public static final int STOPPED = 0;
+    public static final int SLOW = 1;
+    public static final int MEDIUM = 2;
+    public static final int FAST = 3;
+
+    // Private fields with their default values
+    private int speed;
+    private boolean on;
+    private double radius;
+    private String color;
+
+    // No-argument constructor
+    public Fan() {
+        this.speed = STOPPED;
+        this.on = false;
+        this.radius = 6.0;
+        this.color = "white";
+    }
+
+    // Argument-based constructor
+    public Fan(int speed, boolean on, double radius, String color) {
+        this.speed = speed;
+        this.on = on;
+        this.radius = radius;
+        this.color = color;
+    }
+
+    // Getter and Setter for speed
+    public int getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(int speed) {
+        if (speed >= STOPPED && speed <= FAST) {
+            this.speed = speed;
+        } else {
+            System.out.println("Invalid speed setting.");
+        }
+    }
+
+    // Getter and Setter for on
+    public boolean isOn() {
+        return on;
+    }
+
+    public void setOn(boolean on) {
+        this.on = on;
+    }
+
+    // Getter and Setter for radius
+    public double getRadius() {
+        return radius;
+    }
+
+    public void setRadius(double radius) {
+        if (radius > 0) {
+            this.radius = radius;
+        } else {
+            System.out.println("Radius must be a positive value.");
+        }
+    }
+
+    // Getter and Setter for color
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    // Returns a clear, readable string description of the fan's current state
+    @Override
+    public String toString() {
+        if (on) {
+            return "Fan Status: ON | Speed: " + speed + " | Radius: " + radius + " | Color: " + color;
+        } else {
+            return "Fan Status: OFF | Radius: " + radius + " | Color: " + color + " (Fan is stopped)";
+        }
+    }
+
+    // Test program to demonstrate functionality
+    public static void main(String[] args) {
+        System.out.println("==================================================");
+        System.out.println("            App CLASS FUNCTIONALITY TEST          ");
+        System.out.println("==================================================");
+
+        // 1. Create a fan instance using the no-argument constructor
+        System.out.println("Creating Fan 1 using the default constructor...");
+        Fan fan1 = new Fan();
+        System.out.println("Fan 1 initial state -> " + fan1.toString());
+        
+        // Exercise getters and setters on the default fan
+        System.out.println("\nModifying Fan 1 state...");
+        fan1.setOn(true);
+        fan1.setSpeed(Fan.MEDIUM);
+        fan1.setRadius(7.5);
+        fan1.setColor("blue");
+        
+        System.out.println("Fan 1 updated values via getters:");
+        System.out.println("  Is On: " + fan1.isOn());
+        System.out.println("  Speed: " + fan1.getSpeed());
+        System.out.println("  Radius: " + fan1.getRadius());
+        System.out.println("  Color: " + fan1.getColor());
+        System.out.println("Fan 1 final state -> " + fan1.toString());
+
+        System.out.println("--------------------------------------------------");
+
+        // 2. Create a fan instance using the argument-based constructor
+        System.out.println("Creating Fan 2 using the argument constructor...");
+        Fan fan2 = new Fan(Fan.FAST, true, 12.0, "red");
+        System.out.println("Fan 2 state -> " + fan2.toString());
+
+        // Demonstrate turning off the fan
+        System.out.println("\nTurning Fan 2 off...");
+        fan2.setOn(false);
+        System.out.println("Fan 2 state -> " + fan2.toString());
+        System.out.println("==================================================");
+    }
+
+}
